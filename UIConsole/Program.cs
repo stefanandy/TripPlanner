@@ -11,17 +11,24 @@ namespace UIConsole
            
            
             AnimalClass[] l= { new Cat(), new Dog(), new Lion()};
+            
+            Console.WriteLine(animalSounds(l));
+        }
+
+
+        static string animalSounds(AnimalClass[] l) {
+           
             StringBuilder ss = new StringBuilder(50);
 
-            for (SByte i = 0; i < l.Length; i++) {
-                
+            for (SByte i = 0; i < l.Length; i++)
+            {
                 ss.Append(l[i].GetName());
-                ss.Append(" make sound ");
+                ss.Append(" makes ");
                 ss.Append(l[i].MakeSound());
                 ss.Append(Environment.NewLine);
             }
 
-            Console.WriteLine(ss.ToString());
+            return ss.ToString();
         }
     }
 }
