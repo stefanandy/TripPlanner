@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/Animal/.vs/Animal/v16/Server/sqlite3
+/Animal/.vs/Animal/v16
+/Animal/bin/Debug/netstandard2.0
+/Animal/obj
+/UIConsole/bin/Debug/netcoreapp3.0
+/UIConsole/obj

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animal", "Animal.csproj", "{FFA7E860-7A29-4F9D-AFFC-DD24621A3152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIConsole", "..\UIConsole\UIConsole.csproj", "{AB66406E-B489-4706-8CB7-F80DFAF3F689}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFA7E860-7A29-4F9D-AFFC-DD24621A3152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFA7E860-7A29-4F9D-AFFC-DD24621A3152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFA7E860-7A29-4F9D-AFFC-DD24621A3152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFA7E860-7A29-4F9D-AFFC-DD24621A3152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB66406E-B489-4706-8CB7-F80DFAF3F689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB66406E-B489-4706-8CB7-F80DFAF3F689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB66406E-B489-4706-8CB7-F80DFAF3F689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB66406E-B489-4706-8CB7-F80DFAF3F689}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48DA1376-6714-40AE-A707-DFBBA94D88C7}
+	EndGlobalSection
+EndGlobal
