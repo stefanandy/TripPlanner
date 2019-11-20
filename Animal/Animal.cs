@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Animal
+namespace Business
 {
-    public class AnimalExtends : AnimalClass
+    public class Animal
+
     {
-        public override string GetName()
+        protected string name;
+        protected string sound;
+
+        public  string GetName()
         {
             return name;
         }
 
-        public override string MakeSound()
+        public  string MakeSound()
         {
             return sound;
         }

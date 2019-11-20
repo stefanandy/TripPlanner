@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Animal
+namespace Business
 {
-    public class Cat : AnimalExtends
+    public class Cat : Animal
     {
         public Cat()
         {

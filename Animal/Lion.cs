@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Animal
+namespace Business
 {
-    public class Lion : AnimalExtends
+    public class Lion : Animal
     {
         public Lion()
         {
             name = "Lion";
             sound = "rrrr";
         }
-
-       
 
        
     }

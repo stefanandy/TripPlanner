@@ -1,6 +1,7 @@
 ﻿using System;
-using Animal;
 using System.Text;
+using Business;
+
 
 namespace UIConsole
 {
@@ -8,23 +9,22 @@ namespace UIConsole
     {
         static void Main(string[] args)
         {
-           
-           
-            AnimalClass[] l= { new Cat(), new Dog(), new Lion()};
+
+            Animal[] animalList= { new Cat(), new Dog(), new Lion() };
             
-            Console.WriteLine(animalSounds(l));
+            Console.WriteLine(animalSounds(animalList));
         }
 
 
-        static string animalSounds(AnimalClass[] l) {
+        static string animalSounds(Animal[] animalList) {
            
-            StringBuilder ss = new StringBuilder(50);
+            StringBuilder ss = new StringBuilder();
 
-            for (SByte i = 0; i < l.Length; i++)
+            for (SByte i = 0; i < animalList.Length; i++)
             {
-                ss.Append(l[i].GetName());
+                ss.Append(animalList[i].GetName());
                 ss.Append(" makes ");
-                ss.Append(l[i].MakeSound());
+                ss.Append(animalList[i].MakeSound());
                 ss.Append(Environment.NewLine);
             }
 
