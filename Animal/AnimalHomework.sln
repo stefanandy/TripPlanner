@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animal", "Animal.csproj", "{FFA7E860-7A29-4F9D-AFFC-DD24621A3152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business.csproj", "{FFA7E860-7A29-4F9D-AFFC-DD24621A3152}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIConsole", "..\UIConsole\UIConsole.csproj", "{AB66406E-B489-4706-8CB7-F80DFAF3F689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UIConsole", "..\UIConsole\UIConsole.csproj", "{AB66406E-B489-4706-8CB7-F80DFAF3F689}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
