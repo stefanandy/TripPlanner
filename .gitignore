@@ -12,3 +12,10 @@
 /Animal/.vs
 /TripPlanner/.vs/TripPlanner/v16
 /TripPlanner/obj
+
+/Business.Tests/bin/Debug/netcoreapp3.0
+/Business.Tests/obj
+/TripPlanner/.vs/TripPlanner/DesignTimeBuild
+/TripPlanner/bin/Debug/netcoreapp3.0
+/UI.Console/bin/Debug/netcoreapp3.0
+/UI.Console/obj
