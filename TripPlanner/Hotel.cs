@@ -6,43 +6,41 @@ namespace Business
 {
     public class Hotel
     {
-        TripPlanner.Customer[] customerCollection;
-        Room[] roomCollection;
+        private List<TripPlanner.Customer> customers;
+        private List<Room> rooms;
 
-        public Hotel(int numberOfRooms, int numberOfCustomers) {
-            InitializeRooms(numberOfRooms);
-            InitializeCustomers(numberOfCustomers);
+        public Hotel() {
+            InitializeRooms();
+            InitializeCustomers();
+        }
+
+
+        private void InitializeRooms() {
+           rooms = new List<Room>();
+        }
+
+        private void InitializeCustomers() {
+            customers = new List<TripPlanner.Customer>();
         }
 
         public int NumberOfRooms()
         {
-            return roomCollection.Length;
+            return rooms.Count;
         }
 
         public int NumberOfCustomers()
         {
-            return customerCollection.Length;
+            return customers.Count;
         }
 
 
-        void InitializeRooms(int numberOfRooms)
-        {
-            roomCollection = new Room[numberOfRooms];
 
-            for(int i=0;i< numberOfRooms; i++)
-            {
-                roomCollection[i] = new Room();
-            }
+        public void AddRoom(Room room) {
+            rooms.Add(room);
         }
 
-        void InitializeCustomers(int numberOfCustomers)
-        {
-            customerCollection = new TripPlanner.Customer[numberOfCustomers];
-
-            for (int i = 0; i < numberOfCustomers; i++)
-            {
-                customerCollection[i] = new TripPlanner.Customer();
-            }
+        public void AddCustomer(TripPlanner.Customer customer) {
+            customers.Add(customer);
         }
 
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Business
 {
-    class Room
+    public class Room
     {
     }
 }
