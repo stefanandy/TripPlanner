@@ -17,14 +17,14 @@ namespace Business
 
         private void SetNumberOfRooms(int numberOfRooms, Hotel hotel) {
             for (int i = 0; i < numberOfRooms; i++) {
-                hotel.AddRoom(new Room());
+                hotel.AddRoom(new Room() );
             }
         }
 
         private void SetNumberOfCustomers(int numberOfCustomers,  Hotel hotel) {
             for (int i = 0; i < numberOfCustomers; i++)
             {
-                hotel.AddCustomer(new TripPlanner.Customer());
+                hotel.AddCustomer(new TripPlanner.Customer() );
             }
         }
 

@@ -14,6 +14,9 @@ namespace Business
             InitializeCustomers();
         }
 
+        public List<Room> Rooms() {
+            return rooms;
+        }
 
         private void InitializeRooms() {
            rooms = new List<Room>();
