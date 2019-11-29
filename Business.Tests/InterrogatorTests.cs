@@ -53,7 +53,7 @@ namespace Business.Tests
                 $"{reservationOnFirstRoom.Id},{anotherReservationOnFirstRoom.Id} " +
                 $"on the same date {expectedDate}"
             };
-            Assert.AreEqual(expected, actualValue);
+            CollectionAssert.AreEqual(expected, actualValue);
         }
 
         [TestMethod]
@@ -67,14 +67,14 @@ namespace Business.Tests
             // create an Interrogator
 
             HotelBuilder hotelBuilder = new HotelBuilder();
-            Hotel hotel = hotelBuilder.CreateHotel(1, 0);
+            Hotel hotel = hotelBuilder.CreateHotel(0, 0);
 
-            reservationOnFirstRoom.SetReservationStart(DateTime.Now);
-            reservationOnFirstRoom.SetReservationEnd(DateTime.Now);
+            reservationOnFirstRoom.SetReservationStart(new DateTime(2014,04,05));
+            reservationOnFirstRoom.SetReservationEnd(new DateTime(2014,04,06));
 
 
-            anotherReservationOnFirstRoom.SetReservationStart(DateTime.Now);
-            anotherReservationOnFirstRoom.SetReservationEnd(DateTime.Now);
+            anotherReservationOnFirstRoom.SetReservationStart(new DateTime(2012,03,02));
+            anotherReservationOnFirstRoom.SetReservationEnd(new DateTime(2012, 03, 04));
 
             firstRoom.AddReservation(reservationOnFirstRoom);
             firstRoom.AddReservation(anotherReservationOnFirstRoom);
@@ -84,7 +84,7 @@ namespace Business.Tests
 
             string[] actualValue = interrogator.GetReservationConflicts();
             string[] expected = new string[0];
-            Assert.AreEqual(expected, actualValue);
+            CollectionAssert.AreEqual(expected, actualValue);
         }
     }
 
