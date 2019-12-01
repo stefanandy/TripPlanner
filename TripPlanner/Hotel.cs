@@ -8,14 +8,26 @@ namespace Business
     {
         private List<TripPlanner.Customer> customers;
         private List<Room> rooms;
+        private List<Reservation> reservations;
 
         public Hotel() {
             InitializeRooms();
             InitializeCustomers();
+            InitializeReservations();
         }
+
+
 
         public List<Room> Rooms() {
             return rooms;
+        }
+
+        public List<Reservation> Reservations() {
+            return reservations;
+        }
+
+        private void InitializeReservations() {
+            reservations = new List<Reservation>();
         }
 
         private void InitializeRooms() {
@@ -44,6 +56,10 @@ namespace Business
 
         public void AddCustomer(TripPlanner.Customer customer) {
             customers.Add(customer);
+        }
+
+        public void AddReservation(Reservation reservation) {
+            reservations.Add(reservation);
         }
 
 

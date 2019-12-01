@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Business
 {
@@ -15,43 +16,36 @@ namespace Business
 
         public string[] GetReservationConflicts()
         {
-            List<Room> rooms = hotel.Rooms();
-            int numberOfRooms = rooms.Count;
-
+           
             string[] reservationConflicts=new string[0];
 
-            for (int i = 0; i < numberOfRooms; i++)
+            
+            List<Reservation> reservations =hotel.Reservations();
+
+
+            for (int i = 0; i < reservations.Count; i++)
             {
-                List<Reservation> reservations = rooms[i].GetReservations();
+                for (int j=i+1 ; j < reservations.Count; j++)
+                {
+                    if (Compare(reservations[i],reservations[j]) ) {
 
-                for (int j = 0; j < reservations.Count-1; j++) {
-
-                    for (int k = i+1; k < reservations.Count; k++)
-                    {
-                        if (CompareReservations(reservations[j].ReservationDates(), reservations[k].ReservationDates()) == false)
-                        {
-                            Array.Resize(ref reservationConflicts, reservationConflicts.Length + 1);
-                            reservationConflicts[reservationConflicts.Length - 1] = new String($"The room {rooms[i].Id} has multiple reservations: " +
-                            $"{reservations[j].Id},{reservations[k].Id} " + $"on the same date {reservations[j].ReservationDates()[0]}");
-                            reservations.RemoveAt(k);
-                        }
+                        Array.Resize(ref reservationConflicts, reservationConflicts.Length + 1);
+                        reservationConflicts[reservationConflicts.Length - 1] = new String($"The room {reservations[i].RoomId} has multiple reservations: " +
+                        $"{reservations[i].Id},{reservations[j].Id} " + $"on the same date {reservations[i].ReservationDates().ElementAt(0)}");
+                        reservations.RemoveAt(j);
                     }
                 }
+                
             }
-
-            
+                    
             return reservationConflicts;
         }
 
-        private bool CompareReservations(List<DateTime> first, List<DateTime> second) {
-
-            if(first[0]==second[0] || first[1] == second[1] ) {
-
-                return false;
-            } 
-
-            return true;
+        private bool Compare(Reservation first, Reservation second) {
+            if (first.RoomId == second.RoomId && first.ReservationDates().ElementAt(0).Date==second.ReservationDates().ElementAt(0).Date) {
+                return true;
+            }
+            return false;
         }
-
     }
 }

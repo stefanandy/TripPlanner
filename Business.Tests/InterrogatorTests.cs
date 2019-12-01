@@ -34,14 +34,20 @@ namespace Business.Tests
 
             reservationOnFirstRoom.SetReservationStart(DateTime.Now);
             reservationOnFirstRoom.SetReservationEnd(DateTime.Now);
-
+            reservationOnFirstRoom.RoomId = 1;
+            reservationOnFirstRoom.Id = 1;
 
             anotherReservationOnFirstRoom.SetReservationStart(DateTime.Now);
             anotherReservationOnFirstRoom.SetReservationEnd(DateTime.Now);
+            anotherReservationOnFirstRoom.RoomId = 1;
+            anotherReservationOnFirstRoom.Id = 2;
 
-            firstRoom.AddReservation(reservationOnFirstRoom);
-            firstRoom.AddReservation(anotherReservationOnFirstRoom);
+            firstRoom.Id = 1;
+
             hotel.AddRoom(firstRoom);
+
+            hotel.AddReservation(reservationOnFirstRoom);
+            hotel.AddReservation(anotherReservationOnFirstRoom);
 
             interrogator = new Interrogator(hotel);
 
@@ -71,14 +77,22 @@ namespace Business.Tests
 
             reservationOnFirstRoom.SetReservationStart(new DateTime(2014,04,05));
             reservationOnFirstRoom.SetReservationEnd(new DateTime(2014,04,06));
-
+            reservationOnFirstRoom.RoomId = 1;
+            reservationOnFirstRoom.Id = 1;
 
             anotherReservationOnFirstRoom.SetReservationStart(new DateTime(2012,03,02));
             anotherReservationOnFirstRoom.SetReservationEnd(new DateTime(2012, 03, 04));
+            anotherReservationOnFirstRoom.RoomId = 1;
+            anotherReservationOnFirstRoom.Id = 2;
 
-            firstRoom.AddReservation(reservationOnFirstRoom);
-            firstRoom.AddReservation(anotherReservationOnFirstRoom);
+            firstRoom.Id = 1;
+
             hotel.AddRoom(firstRoom);
+
+            hotel.AddReservation(reservationOnFirstRoom);
+            hotel.AddReservation(anotherReservationOnFirstRoom);
+
+            
 
             interrogator = new Interrogator(hotel);
 

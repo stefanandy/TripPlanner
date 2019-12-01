@@ -9,6 +9,8 @@ namespace Business
         public int Id { get; set; }
         private List<DateTime> Dates;
 
+        public int RoomId { get; set; }
+
         public Reservation() {
             Dates = new List<DateTime>(1);
         }
