@@ -34,14 +34,20 @@ namespace Business.Tests
 
             reservationOnFirstRoom.SetReservationStart(DateTime.Now);
             reservationOnFirstRoom.SetReservationEnd(DateTime.Now);
-
+            reservationOnFirstRoom.RoomId = 1;
+            reservationOnFirstRoom.Id = 1;
 
             anotherReservationOnFirstRoom.SetReservationStart(DateTime.Now);
             anotherReservationOnFirstRoom.SetReservationEnd(DateTime.Now);
+            anotherReservationOnFirstRoom.RoomId = 1;
+            anotherReservationOnFirstRoom.Id = 2;
 
-            firstRoom.AddReservation(reservationOnFirstRoom);
-            firstRoom.AddReservation(anotherReservationOnFirstRoom);
+            firstRoom.Id = 1;
+
             hotel.AddRoom(firstRoom);
+
+            hotel.AddReservation(reservationOnFirstRoom);
+            hotel.AddReservation(anotherReservationOnFirstRoom);
 
             interrogator = new Interrogator(hotel);
 
@@ -53,7 +59,7 @@ namespace Business.Tests
                 $"{reservationOnFirstRoom.Id},{anotherReservationOnFirstRoom.Id} " +
                 $"on the same date {expectedDate}"
             };
-            Assert.AreEqual(expected, actualValue);
+            CollectionAssert.AreEqual(expected, actualValue);
         }
 
         [TestMethod]
@@ -67,24 +73,32 @@ namespace Business.Tests
             // create an Interrogator
 
             HotelBuilder hotelBuilder = new HotelBuilder();
-            Hotel hotel = hotelBuilder.CreateHotel(1, 0);
+            Hotel hotel = hotelBuilder.CreateHotel(0, 0);
 
-            reservationOnFirstRoom.SetReservationStart(DateTime.Now);
-            reservationOnFirstRoom.SetReservationEnd(DateTime.Now);
+            reservationOnFirstRoom.SetReservationStart(new DateTime(2014,04,05));
+            reservationOnFirstRoom.SetReservationEnd(new DateTime(2014,04,06));
+            reservationOnFirstRoom.RoomId = 1;
+            reservationOnFirstRoom.Id = 1;
 
+            anotherReservationOnFirstRoom.SetReservationStart(new DateTime(2012,03,02));
+            anotherReservationOnFirstRoom.SetReservationEnd(new DateTime(2012, 03, 04));
+            anotherReservationOnFirstRoom.RoomId = 1;
+            anotherReservationOnFirstRoom.Id = 2;
 
-            anotherReservationOnFirstRoom.SetReservationStart(DateTime.Now);
-            anotherReservationOnFirstRoom.SetReservationEnd(DateTime.Now);
+            firstRoom.Id = 1;
 
-            firstRoom.AddReservation(reservationOnFirstRoom);
-            firstRoom.AddReservation(anotherReservationOnFirstRoom);
             hotel.AddRoom(firstRoom);
+
+            hotel.AddReservation(reservationOnFirstRoom);
+            hotel.AddReservation(anotherReservationOnFirstRoom);
+
+            
 
             interrogator = new Interrogator(hotel);
 
             string[] actualValue = interrogator.GetReservationConflicts();
             string[] expected = new string[0];
-            Assert.AreEqual(expected, actualValue);
+            CollectionAssert.AreEqual(expected, actualValue);
         }
     }
 

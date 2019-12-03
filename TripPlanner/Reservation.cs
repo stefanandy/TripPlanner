@@ -7,20 +7,22 @@ namespace Business
     public class Reservation
     {
         public int Id { get; set; }
-        private DateTime[] Dates;
+        private List<DateTime> Dates;
+
+        public int RoomId { get; set; }
 
         public Reservation() {
-            Dates = new DateTime[2];
+            Dates = new List<DateTime>(1);
         }
 
         public void SetReservationStart(DateTime reservationStart) {
-            Dates[0] = reservationStart;
+            Dates.Insert(0, reservationStart);
         }
         public void SetReservationEnd(DateTime reservationEnd) {
-            Dates[1] = reservationEnd;   
+            Dates.Insert(1, reservationEnd);   
         }
 
-        public DateTime[] ReservationDates() {
+        public List<DateTime> ReservationDates() {
             return Dates;
         }
 
