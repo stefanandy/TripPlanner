@@ -65,9 +65,34 @@ namespace Business
         }
         public Customer[] FindFirstCustomersGroupedByCountry() {
 
-            Customer[] c = new Customer[1];
+            List<Customer> customers = hotel.Customers();
+            List<Customer> customersFromSameCountry = new List<Customer>();
+            List<string> countrys = new List<string>();
 
-            return c;
+            int counter = 0;
+
+
+            for (int i = 0; i < customers.Count; i++) {
+
+                for (int j = 1; j < customers.Count && counter<10; j++) {
+                    if (customers[i].Country != customers[j].Country)
+                    {
+                        customersFromSameCountry.Add(customers[j]);
+                        counter++;
+                        customers.RemoveAt(j);
+                    }
+                    else {
+                        customers.RemoveAt(j);
+                    }
+                }
+            
+            }
+
+            //customersFromSameCountry = customers.GroupBy(x => x.Country).Where(c => c.Count() > 1).Select(g=>g).ToList();
+
+            customersFromSameCountry = customersFromSameCountry.OrderBy(x=>x.FirstAccomodation).ToList();
+
+            return customersFromSameCountry.ToArray();
         }
 
     }

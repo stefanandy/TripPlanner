@@ -177,7 +177,18 @@ namespace Business.Tests
         {
             // Arrange an hotel with customers
             // Create interrogator with the hotel
+            HotelBuilder hotelBuilder = new HotelBuilder();
+            Hotel hotel = hotelBuilder.CreateHotel(0, 0);
 
+            DataImporter importer = new DataImporter();
+
+            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputCustomers.csv";
+            Customer[] customersFromCsv = importer.ReadCustomers(filePath);
+
+            for (int i = 0; i < customersFromCsv.Length; i++) {
+                hotel.AddCustomer(customersFromCsv[i]);
+            }
+            interrogator = new Interrogator(hotel);
             Customer[] customers = interrogator.FindFirstCustomersGroupedByCountry();
             int expectedNumberOfCustomers = 10;
             Assert.AreEqual(expectedNumberOfCustomers, customers.Length);
