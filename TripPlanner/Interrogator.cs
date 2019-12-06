@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using TripPlanner;
 
 namespace Business
 {
@@ -47,5 +48,27 @@ namespace Business
             }
             return false;
         }
+
+        public Customer[] FindByName(string keyword) { //returns all users which have a Name or Surname that matches the provided keyword.
+
+            List<Customer> customers = hotel.Customers().Where(a => a.FirstName == keyword || a.LastName == keyword).ToList();
+
+            return customers.ToArray();
+
+        } 
+
+
+        public Customer[] FindCustomersGroupedByCountry() { //returns a list with the first 10 customers from each distinct country, sorted by the First accomodation date
+            Customer[] c=new Customer[10];
+
+            return c;
+        }
+        public Customer[] FindFirstCustomersGroupedByCountry() {
+
+            Customer[] c = new Customer[1];
+
+            return c;
+        }
+
     }
 }

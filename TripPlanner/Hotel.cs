@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TripPlanner;
 
 namespace Business
 {
     public class Hotel
     {
-        private List<TripPlanner.Customer> customers;
+        private List<Customer> customers;
         private List<Room> rooms;
         private List<Reservation> reservations;
 
@@ -25,6 +26,10 @@ namespace Business
         public List<Reservation> Reservations() {
             return reservations;
         }
+        public List<Customer> Customers()
+        {
+            return customers;
+        }
 
         private void InitializeReservations() {
             reservations = new List<Reservation>();
@@ -35,7 +40,7 @@ namespace Business
         }
 
         private void InitializeCustomers() {
-            customers = new List<TripPlanner.Customer>();
+            customers = new List<Customer>();
         }
 
         public int NumberOfRooms()
@@ -48,7 +53,7 @@ namespace Business
             return customers.Count;
         }
 
-
+       
 
         public void AddRoom(Room room) {
             rooms.Add(room);

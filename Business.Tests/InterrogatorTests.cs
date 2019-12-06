@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TripPlanner;
 
 namespace Business.Tests
 {
@@ -100,7 +101,90 @@ namespace Business.Tests
             string[] expected = new string[0];
             CollectionAssert.AreEqual(expected, actualValue);
         }
+
+
+
+        [TestMethod]
+        public void FindByName_1_Is_Found()
+        {
+            // Arrange an hotel with customers
+            // Create interrogator with the hotel
+
+            HotelBuilder hotelBuilder = new HotelBuilder();
+            Hotel hotel = hotelBuilder.CreateHotel(0, 0);
+
+            Customer customer = new Customer();
+            customer.LastName= "Andrei";
+
+            hotel.AddCustomer(customer);
+
+
+            string customerName = "Andrei"; // replace value
+
+            interrogator = new Interrogator(hotel);
+            Customer[] customers = interrogator.FindByName(customerName);
+
+            Assert.AreEqual(1, customers.Length);
+        }
+
+        [TestMethod]
+        public void FindByName_2_Are_Found()
+        {
+            // Arrange an hotel with customers
+            // Create interrogator with the hotel
+
+            HotelBuilder hotelBuilder = new HotelBuilder();
+            Hotel hotel = hotelBuilder.CreateHotel(0, 0);
+
+            Customer customer = new Customer();
+            customer.LastName = "Andrei";
+
+            hotel.AddCustomer(customer);
+            hotel.AddCustomer(customer);
+
+            string customerName = "Andrei"; // replace value
+
+            interrogator = new Interrogator(hotel);
+
+            Customer[] customers = interrogator.FindByName(customerName);
+
+            Assert.AreEqual(2, customers.Length);
+        }
+
+        [TestMethod]
+        public void FindByName_Not_Found()
+        {
+            HotelBuilder hotelBuilder = new HotelBuilder();
+            Hotel hotel = hotelBuilder.CreateHotel(0, 0);
+
+            Customer customer = new Customer();
+            customer.LastName = "Andrei";
+
+            hotel.AddCustomer(customer);
+
+
+            interrogator = new Interrogator(hotel);
+            string customerName = "Unknown Name";
+            Customer[] customers = interrogator.FindByName(customerName);
+
+
+
+            Assert.AreEqual(0, customers.Length);
+        }
+
+        [TestMethod]
+        public void FindFirstCustomersGroupedByCountry()
+        {
+            // Arrange an hotel with customers
+            // Create interrogator with the hotel
+
+            Customer[] customers = interrogator.FindFirstCustomersGroupedByCountry();
+            int expectedNumberOfCustomers = 10;
+            Assert.AreEqual(expectedNumberOfCustomers, customers.Length);
+        }
     }
-
-
 }
+
+
+  
+
