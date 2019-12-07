@@ -26,5 +26,14 @@ namespace Business
             return start;
         }
 
+        public bool Compare(Reservation reservation)
+        {
+            if (RoomId == reservation.RoomId && StartDate().Date == reservation.StartDate().Date)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

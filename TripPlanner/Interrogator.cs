@@ -28,7 +28,7 @@ namespace Business
             {
                 for (int j=i+1 ; j < reservations.Count; j++)
                 {
-                    if (Compare(reservations[i],reservations[j]) ) {
+                    if (reservations[i].Compare(reservations[j]) ) {
 
                         Array.Resize(ref reservationConflicts, reservationConflicts.Length + 1);
                         reservationConflicts[reservationConflicts.Length - 1] = new String($"The room {reservations[i].RoomId} has multiple reservations: " +
@@ -42,16 +42,11 @@ namespace Business
             return reservationConflicts;
         }
 
-        private bool Compare(Reservation first, Reservation second) {
-            if (first.RoomId == second.RoomId && first.StartDate().Date==second.StartDate().Date) {
-                return true;
-            }
-            return false;
-        }
-
         public Customer[] FindByName(string keyword) {
 
-            List<Customer> customers = hotel.Customers().Where(a => a.FirstName == keyword || a.LastName == keyword).ToList();
+            List<Customer> customers = hotel.Customers()
+                .Where(a => a.FirstName == keyword || a.LastName == keyword)
+                .ToList();
 
             return customers.ToArray();
 
@@ -65,7 +60,8 @@ namespace Business
             List<Customer> customers = new List<Customer>();
 
             var orderedCustomers = hotel.Customers().GroupBy(x => x.Country)
-                        .Select(x => x.OrderBy(x => x.FirstAccomodation).Take(10)).ToList();
+                        .Select(x => x.OrderBy(x => x.FirstAccomodation).Take(10))
+                        .ToList();
 
             foreach (var c in orderedCustomers[0])
             {
