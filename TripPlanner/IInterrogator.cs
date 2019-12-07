@@ -8,7 +8,6 @@ namespace Business
    public interface IInterrogator
     {
         public string[] GetReservationConflicts();
-        public Customer[] FindCustomersGroupedByCountry();
         public Customer[] FindByName(string keyword);
         public Customer[] FindFirstCustomersGroupedByCountry();
     }

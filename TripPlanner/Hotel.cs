@@ -12,9 +12,9 @@ namespace Business
         private List<Reservation> reservations;
 
         public Hotel() {
-            InitializeRooms();
-            InitializeCustomers();
-            InitializeReservations();
+            rooms = new List<Room>();
+            customers = new List<Customer>();
+            reservations = new List<Reservation>();
         }
 
 
@@ -31,17 +31,6 @@ namespace Business
             return customers;
         }
 
-        private void InitializeReservations() {
-            reservations = new List<Reservation>();
-        }
-
-        private void InitializeRooms() {
-           rooms = new List<Room>();
-        }
-
-        private void InitializeCustomers() {
-            customers = new List<Customer>();
-        }
 
         public int NumberOfRooms()
         {
@@ -53,7 +42,6 @@ namespace Business
             return customers.Count;
         }
 
-       
 
         public void AddRoom(Room room) {
             rooms.Add(room);

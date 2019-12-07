@@ -32,7 +32,7 @@ namespace Business
 
                         Array.Resize(ref reservationConflicts, reservationConflicts.Length + 1);
                         reservationConflicts[reservationConflicts.Length - 1] = new String($"The room {reservations[i].RoomId} has multiple reservations: " +
-                        $"{reservations[i].Id},{reservations[j].Id} " + $"on the same date {reservations[i].ReservationDates().ElementAt(0)}");
+                        $"{reservations[i].Id},{reservations[j].Id} " + $"on the same date {reservations[i].StartDate()}");
                         reservations.RemoveAt(j);
                     }
                 }
@@ -43,13 +43,13 @@ namespace Business
         }
 
         private bool Compare(Reservation first, Reservation second) {
-            if (first.RoomId == second.RoomId && first.ReservationDates().ElementAt(0).Date==second.ReservationDates().ElementAt(0).Date) {
+            if (first.RoomId == second.RoomId && first.StartDate().Date==second.StartDate().Date) {
                 return true;
             }
             return false;
         }
 
-        public Customer[] FindByName(string keyword) { //returns all users which have a Name or Surname that matches the provided keyword.
+        public Customer[] FindByName(string keyword) {
 
             List<Customer> customers = hotel.Customers().Where(a => a.FirstName == keyword || a.LastName == keyword).ToList();
 
@@ -58,41 +58,21 @@ namespace Business
         } 
 
 
-        public Customer[] FindCustomersGroupedByCountry() { //returns a list with the first 10 customers from each distinct country, sorted by the First accomodation date
-            Customer[] c=new Customer[10];
+    
 
-            return c;
-        }
         public Customer[] FindFirstCustomersGroupedByCountry() {
 
-            List<Customer> customers = hotel.Customers();
-            List<Customer> customersFromSameCountry = new List<Customer>();
-            List<string> countrys = new List<string>();
+            List<Customer> customers = new List<Customer>();
 
-            int counter = 0;
+            var orderedCustomers = hotel.Customers().GroupBy(x => x.Country)
+                        .Select(x => x.OrderBy(x => x.FirstAccomodation).Take(10)).ToList();
 
-
-            for (int i = 0; i < customers.Count; i++) {
-
-                for (int j = 1; j < customers.Count && counter<10; j++) {
-                    if (customers[i].Country != customers[j].Country)
-                    {
-                        customersFromSameCountry.Add(customers[j]);
-                        counter++;
-                        customers.RemoveAt(j);
-                    }
-                    else {
-                        customers.RemoveAt(j);
-                    }
-                }
-            
+            foreach (var c in orderedCustomers[0])
+            {
+                customers.Add(c);
             }
 
-            //customersFromSameCountry = customers.GroupBy(x => x.Country).Where(c => c.Count() > 1).Select(g=>g).ToList();
-
-            customersFromSameCountry = customersFromSameCountry.OrderBy(x=>x.FirstAccomodation).ToList();
-
-            return customersFromSameCountry.ToArray();
+            return customers.ToArray();
         }
 
     }
