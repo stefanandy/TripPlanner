@@ -86,28 +86,27 @@ namespace Business
 
         public void ReadEncryptedCustomers(string inputFile, string outputFile)
         {
-            string password = @"myKey123"; // Your Key Here
+            string password = @"myKey123"; 
 
-            UnicodeEncoding UE = new UnicodeEncoding();
-            byte[] key = UE.GetBytes(password);
+            UnicodeEncoding encoding = new UnicodeEncoding();
+            byte[] key = encoding.GetBytes(password);
 
-            FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
+            using (FileStream fileToRead = new FileStream(inputFile, FileMode.Open))
+            {
+                RijndaelManaged algoritm = new RijndaelManaged();
 
-            RijndaelManaged RMCrypto = new RijndaelManaged();
+                using (CryptoStream crypt = new CryptoStream(fileToRead, algoritm.CreateDecryptor(key, key), CryptoStreamMode.Read))
+                {
+                    using (FileStream cryptedFile = new FileStream(outputFile, FileMode.Create))
+                    {
 
-            CryptoStream cs = new CryptoStream(fsCrypt,
-                RMCrypto.CreateDecryptor(key, key),
-                CryptoStreamMode.Read);
+                        int data;
+                        while ((data = crypt.ReadByte()) != -1)
+                            cryptedFile.WriteByte((byte)data);
 
-            FileStream fsOut = new FileStream(outputFile, FileMode.Create);
-
-            int data;
-            while ((data = cs.ReadByte()) != -1)
-                fsOut.WriteByte((byte)data);
-
-            fsOut.Close();
-            cs.Close();
-            fsCrypt.Close();
+                    }
+                }
+            }
 
         }
 

@@ -30,25 +30,27 @@ namespace Business
             UnicodeEncoding UE = new UnicodeEncoding();
             byte[] key = UE.GetBytes(password);
 
-            string cryptFile = outputFile;
+            using (FileStream fileToWrite = new FileStream(outputFile, FileMode.Create))
+            {
 
-            FileStream fsCrypt = new FileStream(cryptFile, FileMode.Create);
+                RijndaelManaged algortim = new RijndaelManaged();
 
-            RijndaelManaged RMCrypto = new RijndaelManaged();
+                using (CryptoStream crypt = new CryptoStream(fileToWrite, algortim.CreateEncryptor(key, key), CryptoStreamMode.Write))
+                {
 
-            CryptoStream cs = new CryptoStream(fsCrypt, RMCrypto.CreateEncryptor(key,key),CryptoStreamMode.Write);
+                    using (FileStream fileToRead = new FileStream(inputFile, FileMode.Open))
+                    {
 
-            FileStream fsIn = new FileStream(inputFile, FileMode.Open);
+                        int data;
 
-            int data;
+                        while ((data = fileToRead.ReadByte()) != -1)
+                        {
+                            crypt.WriteByte((byte)data);
+                        }
 
-            while ((data=fsIn.ReadByte())!=-1) {
-                cs.WriteByte((byte)data);
+                    }
+                }
             }
-
-            fsIn.Close();
-            cs.Close();
-            fsCrypt.Close();
         }
     }
 }
