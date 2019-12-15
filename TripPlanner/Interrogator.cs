@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using TripPlanner;
 
 namespace Business
 {
@@ -27,11 +28,11 @@ namespace Business
             {
                 for (int j=i+1 ; j < reservations.Count; j++)
                 {
-                    if (Compare(reservations[i],reservations[j]) ) {
+                    if (reservations[i].Compare(reservations[j]) ) {
 
                         Array.Resize(ref reservationConflicts, reservationConflicts.Length + 1);
                         reservationConflicts[reservationConflicts.Length - 1] = new String($"The room {reservations[i].RoomId} has multiple reservations: " +
-                        $"{reservations[i].Id},{reservations[j].Id} " + $"on the same date {reservations[i].ReservationDates().ElementAt(0)}");
+                        $"{reservations[i].Id},{reservations[j].Id} " + $"on the same date {reservations[i].StartDate()}");
                         reservations.RemoveAt(j);
                     }
                 }
@@ -41,11 +42,34 @@ namespace Business
             return reservationConflicts;
         }
 
-        private bool Compare(Reservation first, Reservation second) {
-            if (first.RoomId == second.RoomId && first.ReservationDates().ElementAt(0).Date==second.ReservationDates().ElementAt(0).Date) {
-                return true;
+        public Customer[] FindByName(string keyword) {
+
+            List<Customer> customers = hotel.Customers()
+                .Where(a => a.FirstName == keyword || a.LastName == keyword)
+                .ToList();
+
+            return customers.ToArray();
+
+        } 
+
+
+    
+
+        public Customer[] FindFirstCustomersGroupedByCountry() {
+
+            List<Customer> customers = new List<Customer>();
+
+            var orderedCustomers = hotel.Customers().GroupBy(x => x.Country)
+                        .Select(x => x.OrderBy(x => x.FirstAccomodation).Take(10))
+                        .ToList();
+
+            foreach (var c in orderedCustomers[0])
+            {
+                customers.Add(c);
             }
-            return false;
+
+            return customers.ToArray();
         }
+
     }
 }
