@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using TripPlanner;
+using System.Collections;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Linq;
 using System.Globalization;
+using System.Security.Cryptography;
 
 namespace Business
 {
@@ -26,7 +28,7 @@ namespace Business
 
                     var line = reader.ReadLine();
                     
-                    customers.Add(Customer.Parse(line));
+                    customers.Add(new Customer(line));
 
                 }
             
@@ -34,9 +36,84 @@ namespace Business
             return customers.ToArray();
         }
 
+        public ArrayList ReadRooms(string filePath) {
+            List<Room> rooms = new List<Room>();
+            using (var reader = new StreamReader(filePath))
+            {
 
+                reader.ReadLine();
+
+                while (!reader.EndOfStream)
+                {
+
+                    var line = reader.ReadLine();
+
+                    rooms.Add(new Room(line));
+
+                }
+
+            }
+
+            var arrayList = new ArrayList(rooms);
+
+            return arrayList;
+        }
+
+
+        public Queue<Reservation> ReadReservations(string filePath) {
+            List<Reservation> reservations = new List<Reservation>();
+
+            using (var reader = new StreamReader(filePath))
+            {
+
+                reader.ReadLine();
+
+                while (!reader.EndOfStream)
+                {
+
+                    var line = reader.ReadLine();
+
+                    reservations.Add(new Reservation(line));
+
+                }
+
+            }
+
+            var queue = new Queue<Reservation>(reservations);
+
+            return queue;
+        }
+
+        public void ReadEncryptedCustomers(string inputFile, string outputFile)
+        {
+            string password = @"myKey123"; // Your Key Here
+
+            UnicodeEncoding UE = new UnicodeEncoding();
+            byte[] key = UE.GetBytes(password);
+
+            FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
+
+            RijndaelManaged RMCrypto = new RijndaelManaged();
+
+            CryptoStream cs = new CryptoStream(fsCrypt,
+                RMCrypto.CreateDecryptor(key, key),
+                CryptoStreamMode.Read);
+
+            FileStream fsOut = new FileStream(outputFile, FileMode.Create);
+
+            int data;
+            while ((data = cs.ReadByte()) != -1)
+                fsOut.WriteByte((byte)data);
+
+            fsOut.Close();
+            cs.Close();
+            fsCrypt.Close();
+
+        }
 
     }
+
+   
 
 
     
