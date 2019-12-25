@@ -35,15 +35,15 @@ namespace Business.Tests
 
             reservationOnFirstRoom.SetReservationStart(DateTime.Now);
             reservationOnFirstRoom.SetReservationEnd(DateTime.Now);
-            reservationOnFirstRoom.RoomId = 1;
+            reservationOnFirstRoom.RoomNumber = 1;
             reservationOnFirstRoom.Id = 1;
 
             anotherReservationOnFirstRoom.SetReservationStart(DateTime.Now);
             anotherReservationOnFirstRoom.SetReservationEnd(DateTime.Now);
-            anotherReservationOnFirstRoom.RoomId = 1;
+            anotherReservationOnFirstRoom.RoomNumber = 1;
             anotherReservationOnFirstRoom.Id = 2;
 
-            firstRoom.Id = 1;
+            firstRoom.RoomNumber = 1;
 
             hotel.AddRoom(firstRoom);
 
@@ -56,7 +56,7 @@ namespace Business.Tests
             DateTime expectedDate = DateTime.Now; // this value can be changed
             string[] expected = new[]
             {
-                $"The room {firstRoom.Id} has multiple reservations: " +
+                $"The room {firstRoom.RoomNumber} has multiple reservations: " +
                 $"{reservationOnFirstRoom.Id},{anotherReservationOnFirstRoom.Id} " +
                 $"on the same date {expectedDate}"
             };
@@ -78,15 +78,15 @@ namespace Business.Tests
 
             reservationOnFirstRoom.SetReservationStart(new DateTime(2014,04,05));
             reservationOnFirstRoom.SetReservationEnd(new DateTime(2014,04,06));
-            reservationOnFirstRoom.RoomId = 1;
+            reservationOnFirstRoom.RoomNumber = 1;
             reservationOnFirstRoom.Id = 1;
 
             anotherReservationOnFirstRoom.SetReservationStart(new DateTime(2012,03,02));
             anotherReservationOnFirstRoom.SetReservationEnd(new DateTime(2012, 03, 04));
-            anotherReservationOnFirstRoom.RoomId = 1;
+            anotherReservationOnFirstRoom.RoomNumber = 1;
             anotherReservationOnFirstRoom.Id = 2;
 
-            firstRoom.Id = 1;
+            firstRoom.RoomNumber = 1;
 
             hotel.AddRoom(firstRoom);
 

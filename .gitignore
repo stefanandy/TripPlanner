@@ -20,3 +20,7 @@
 /UI.Console/bin/Debug/netcoreapp3.0
 /UI.Console/obj
 /TripPlanner/inputCustomers.csv
+/TripPlanner/inputRooms.csv
+/TripPlanner/inputReservations.csv
+/TripPlanner/findCustomersGroupedByCountry.csv
+/TripPlanner/findByName.csv

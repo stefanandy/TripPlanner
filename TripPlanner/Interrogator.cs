@@ -31,7 +31,7 @@ namespace Business
                     if (reservations[i].Compare(reservations[j]) ) {
 
                         Array.Resize(ref reservationConflicts, reservationConflicts.Length + 1);
-                        reservationConflicts[reservationConflicts.Length - 1] = new String($"The room {reservations[i].RoomId} has multiple reservations: " +
+                        reservationConflicts[reservationConflicts.Length - 1] = new String($"The room {reservations[i].RoomNumber} has multiple reservations: " +
                         $"{reservations[i].Id},{reservations[j].Id} " + $"on the same date {reservations[i].StartDate()}");
                         reservations.RemoveAt(j);
                     }

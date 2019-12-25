@@ -1,5 +1,9 @@
 ﻿using System;
 using Business;
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
+
 
 namespace UI.Console
 {
@@ -7,10 +11,24 @@ namespace UI.Console
     {
         static void Main(string[] args)
         {
-            IHotelBuilder hotelBuilder = new HotelBuilder();
-            var hotel = hotelBuilder.CreateHotel(100,399);
-            System.Console.WriteLine("In Hotel sunt "+hotel.NumberOfRooms()+" camere");
-            System.Console.WriteLine("In Hotel sunt " + hotel.NumberOfCustomers() + " clienti");
+            string roomsFilePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputRooms.csv";
+           
+
+            DataImporter importer = new DataImporter();
+
+            List<Room> rooms = importer.ReadRooms(roomsFilePath).Cast<Room>().ToList();
+
+            ReservationAggregator aggregator = new ReservationAggregator();
+
+            var groupedReservations = aggregator.ReservationsGroupedByRooms(rooms);
+
+            var lines = aggregator.DisplayGroupedReservations(groupedReservations);
+
+            foreach (var line in lines)
+            {
+                System.Console.WriteLine(line);
+            }
+            
         }
     }
 }
