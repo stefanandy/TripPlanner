@@ -71,5 +71,33 @@ namespace Business
             return customers.ToArray();
         }
 
+        public List<Reservation> SortReservationByDate(List<Reservation> reservations)
+        {
+            reservations.Sort((x,y)=>x.StartDate().Date
+                                      .CompareTo(y.StartDate().Date));
+            return reservations;
+        }
+
+        public List<List<Reservation>> DetectOverlaps(List<Reservation> reservations)
+        {
+            List<List<Reservation>> overlaps = new List<List<Reservation>>();
+
+            foreach (var reservation in reservations)
+            {
+                var overlapped = reservations.Where(x => x != reservation && 
+                                 reservations.Any(y => x != y && 
+                                 x.AreOverlapped(y))).
+                                 ToList();
+
+                overlaps.Add(overlapped);
+            }
+
+            return overlaps;
+        }
+
+        public List<Reservation> AdjustReservations(List<Reservation> initialReservations, List<Reservation> reservationsToFit)
+        {
+           return  initialReservations.Concat(reservationsToFit).ToList();
+        }
     }
 }

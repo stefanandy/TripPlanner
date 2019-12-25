@@ -14,24 +14,18 @@ namespace Business
 {
     public class DataImporter:IDataImporter
     {
-
+        private readonly int FINISH_TO_READ = -1;
 
         public Customer[] ReadCustomers(string filePath)
         {
             List<Customer> customers = new List<Customer>();
 
-            using (var reader = new StreamReader(filePath)) {
-
+            using (var reader = new StreamReader(filePath)){
                 reader.ReadLine();
-                
                 while (!reader.EndOfStream ) {
-
                     var line = reader.ReadLine();
-                    
                     customers.Add(new Customer(line));
-
                 }
-            
             }
             return customers.ToArray();
         }
@@ -40,22 +34,14 @@ namespace Business
             List<Room> rooms = new List<Room>();
             using (var reader = new StreamReader(filePath))
             {
-
                 reader.ReadLine();
-
                 while (!reader.EndOfStream)
                 {
-
                     var line = reader.ReadLine();
-
                     rooms.Add(new Room(line));
-
                 }
-
             }
-
             var arrayList = new ArrayList(rooms);
-
             return arrayList;
         }
 
@@ -65,22 +51,15 @@ namespace Business
 
             using (var reader = new StreamReader(filePath))
             {
-
                 reader.ReadLine();
-
                 while (!reader.EndOfStream)
                 {
-
                     var line = reader.ReadLine();
-
                     reservations.Add(new Reservation(line));
-
                 }
-
             }
 
             var queue = new Queue<Reservation>(reservations);
-
             return queue;
         }
 
@@ -91,30 +70,18 @@ namespace Business
             UnicodeEncoding encoding = new UnicodeEncoding();
             byte[] key = encoding.GetBytes(password);
 
-            using (FileStream fileToRead = new FileStream(inputFile, FileMode.Open))
-            {
-                RijndaelManaged algoritm = new RijndaelManaged();
+            RijndaelManaged algoritm = new RijndaelManaged();
 
+            using (FileStream fileToRead = new FileStream(inputFile, FileMode.Open))     
                 using (CryptoStream crypt = new CryptoStream(fileToRead, algoritm.CreateDecryptor(key, key), CryptoStreamMode.Read))
-                {
                     using (FileStream cryptedFile = new FileStream(outputFile, FileMode.Create))
                     {
-
                         int data;
-                        while ((data = crypt.ReadByte()) != -1)
+                        while ((data = crypt.ReadByte()) != FINISH_TO_READ)
                             cryptedFile.WriteByte((byte)data);
-
                     }
-                }
-            }
-
         }
 
     }
 
-   
-
-
-    
-    
 }

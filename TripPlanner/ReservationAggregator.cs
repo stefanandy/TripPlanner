@@ -8,16 +8,25 @@ namespace Business
 {
     public class ReservationAggregator : IReservationAggregator
     {
+        private List<Reservation> reservations;
+
+        public ReservationAggregator(List<Reservation> _reservations)
+        {
+            reservations = _reservations;
+        }
+
+        public ReservationAggregator() { }
+
         public List<string> DisplayGroupedReservations(Dictionary<Room, List<Reservation> > rooms)
         {
             List<string> grouped = new List<string>();
 
-            foreach (KeyValuePair<Room,List<Reservation>> item in rooms)
+            foreach (KeyValuePair<Room,List<Reservation>> room in rooms)
             {
                 StringBuilder line = new StringBuilder();
-                line.Append($"Room {item.Key.RoomNumber} has the following reservations: ");
+                line.Append($"Room {room.Key.RoomNumber} has the following reservations: ");
 
-                foreach (var reservation in item.Value)
+                foreach (var reservation in room.Value)
                 {
                     line.Append($"reservation {reservation.Id} with dates: {reservation.StartDate().Date} - {reservation.EndDate().Date}");
                     line.Append(Environment.NewLine);
@@ -31,32 +40,33 @@ namespace Business
 
         public Dictionary<Room, List<Reservation>> ReservationsGroupedByRooms(List<Room> rooms)
         {
-            IDataImporter importer = new DataImporter();
-
-            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputReservations.csv";
-            List<Reservation> reservations = importer.ReadReservations(filePath).ToList();
-
-            Dictionary<Room, List<Reservation>> dictionary = new Dictionary<Room, List<Reservation>>();
-
-            for (int i = 0; i < rooms.Count; i++)
+            try
             {
-                List<Reservation> reservationsIdenticalRoom = new List<Reservation>();
-                
-                for (int j = 0; j < reservations.Count; j++)
+                Dictionary<Room, List<Reservation>> reservationsGroupedByRooms = new Dictionary<Room, List<Reservation>>();
+
+                foreach (var room in rooms)
                 {
-                    
-                    if (rooms[i].RoomNumber==reservations[j].RoomNumber) {
-                        reservationsIdenticalRoom.Add(reservations[j]);
-                        reservations.RemoveAt(j);
+                    List<Reservation> reservationsIdenticalRoom = new List<Reservation>();
+
+                    foreach (var reservation in reservations)
+                    {
+                        if (room.RoomNumber == reservation.RoomNumber)
+                        {
+                            reservationsIdenticalRoom.Add(reservation);
+                            reservations.Remove(reservation);
+                        }
                     }
+                    reservationsGroupedByRooms.Add(room, reservationsIdenticalRoom);
                 }
 
-                dictionary.Add(rooms[i], reservationsIdenticalRoom);
+                return reservationsGroupedByRooms;
 
             }
-
-
-            return dictionary;
+            catch (Exception)
+            {
+                throw new ArgumentNullException();
+            }
+           
         }
     }
 }
