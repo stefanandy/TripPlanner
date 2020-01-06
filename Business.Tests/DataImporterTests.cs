@@ -13,7 +13,7 @@ namespace Business.Tests
         {
             IDataImporter importer = new DataImporter();
 
-            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputCustomers.csv";
+            string filePath = @"../../../../TripPlanner/inputCustomers.csv";
             Customer[] customers = importer.ReadCustomers(filePath);
             Assert.AreEqual(1400, customers.Length);
         }
@@ -23,7 +23,7 @@ namespace Business.Tests
         {
             IDataImporter importer = new DataImporter();
 
-            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputRooms.csv";
+            string filePath = @"../../../../TripPlanner/inputRooms.csv";
             ArrayList rooms = importer.ReadRooms(filePath);
             Assert.AreEqual(32, rooms.Count);
         }
@@ -33,7 +33,7 @@ namespace Business.Tests
         {
             IDataImporter importer = new DataImporter();
 
-            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputReservations.csv";
+            string filePath = @"../../../../TripPlanner/inputReservations.csv";
             Queue<Reservation> reservations = importer.ReadReservations(filePath);
             Assert.AreEqual(194, reservations.Count);
         }
@@ -43,8 +43,8 @@ namespace Business.Tests
         public void Read_Encrypted_Customers_File() {
             IDataImporter importer = new DataImporter();
 
-            string inputFile = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\encryptedCustomers.csv";
-            string outputFile = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\decryptedCustomers.csv";
+            string inputFile = @"../../../../TripPlanner/encryptedCustomers.csv";
+            string outputFile = @"../../../../TripPlanner/decryptedCustomers.csv";
 
             importer.ReadEncryptedCustomers(inputFile,outputFile);
 

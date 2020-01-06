@@ -9,7 +9,7 @@ namespace Business.Tests
     [TestClass]
     public class ReservationAggregatorTest
     {
-        private readonly string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputReservations.csv";
+        private readonly string filePath = @"../../../../TripPlanner/inputReservations.csv";
         private IReservationAggregator reservationAggregator;
 
         [TestMethod]

@@ -182,7 +182,7 @@ namespace Business.Tests
 
             DataImporter importer = new DataImporter();
 
-            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputCustomers.csv";
+            string filePath = @"../../../../TripPlanner/inputCustomers.csv";
             Customer[] customersFromCsv = importer.ReadCustomers(filePath);
 
             for (int i = 0; i < customersFromCsv.Length; i++) {

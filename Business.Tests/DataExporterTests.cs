@@ -21,7 +21,7 @@ namespace Business.Tests
 
             DataImporter dataImporter = new DataImporter();
 
-            string filePathImport = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputCustomers.csv";
+            string filePathImport = @"../../../../TripPlanner/inputCustomers.csv";
             Customer[] customersFromCsv = dataImporter.ReadCustomers(filePathImport);
 
             for (int i = 0; i < customersFromCsv.Length; i++)
@@ -32,7 +32,7 @@ namespace Business.Tests
             interogator = new Interrogator(hotel);
 
             Customer[] customers = interogator.FindByName("Nero");
-            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\findByName.csv";
+            string filePath = @"../../../../TripPlanner/findByName.csv";
             dataExporter.WriteCustomers(filePath, customers);
         }
 
@@ -45,7 +45,7 @@ namespace Business.Tests
 
             DataImporter dataImporter = new DataImporter();
 
-            string filePathImport = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputCustomers.csv";
+            string filePathImport = @"../../../../TripPlanner/inputCustomers.csv";
             Customer[] customersFromCsv = dataImporter.ReadCustomers(filePathImport);
 
             for (int i = 0; i < customersFromCsv.Length; i++)
@@ -56,15 +56,15 @@ namespace Business.Tests
             interogator = new Interrogator(hotel);
 
             Customer[] customers = interogator.FindFirstCustomersGroupedByCountry();
-            string filePath = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\findCustomersGroupedByCountry.csv";
+            string filePath = @"../../../../TripPlanner/findCustomersGroupedByCountry.csv";
             dataExporter.WriteCustomers(filePath, customers);
         }
 
         [TestMethod]
         public void WriteEncryptedCustomers()
         {
-            string inputFile = @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\inputCustomers.csv";
-            string outputFile= @"C:\Users\Lejer\source\repos\AnimalsHomework\TripPlanner\encryptedCustomers.csv";
+            string inputFile = @"../../../../TripPlanner/inputCustomers.csv";
+            string outputFile= @"../../../../TripPlanner/encryptedCustomers.csv";
 
             IDataExporter exporter = new DataExport();
             exporter.WriteEncryptedCustomers(inputFile,outputFile);
