@@ -32,3 +32,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    testSelector: 'testAssemblies' # Options: testAssemblies
+    testAssemblyVer2: | # Required when testSelector == TestAssemblies
+      TripPlanner\**\Business.Tests.dll
+      !**\*TestAdapter.dll
+      !**\obj\** 
