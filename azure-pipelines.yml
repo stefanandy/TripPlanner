@@ -34,6 +34,6 @@ steps:
     configuration: '$(buildConfiguration)'
     testSelector: 'testAssemblies' # Options: testAssemblies
     testAssemblyVer2: | # Required when testSelector == TestAssemblies
-      TripPlanner\**\Business.Tests.dll
+      Business.Tests\**\Business.Tests.dll
       !**\*TestAdapter.dll
       !**\obj\** 
