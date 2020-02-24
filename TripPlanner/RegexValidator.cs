@@ -23,8 +23,8 @@ namespace Business
 
         public bool ValidateName(string name)
         {
-            //Regex regex = "^[a - zA - Z] + (([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
-            Regex regex= new Regex(@"^[A-Za-z]+[\s][A-Za-z]+[.][A-Za-z]+$");
+            
+            Regex regex= new Regex("[A - Z][a - zA - Z][^#&<>\"~;$^%{}?]{1,20}$");
             if (regex.IsMatch(name))
             {
                 return true;
