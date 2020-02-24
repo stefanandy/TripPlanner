@@ -52,6 +52,13 @@ namespace Business
             return end;
         }
 
+        public bool AreOverlapped(Reservation reservation) {
+            if (start.Date<=reservation.EndDate().Date && end.Date >= reservation.StartDate().Date)
+            {
+                return true;
+            }
+            return false;
+        }
         public bool Compare(Reservation reservation)
         {
             if (RoomNumber == reservation.RoomNumber && StartDate().Date == reservation.StartDate().Date)

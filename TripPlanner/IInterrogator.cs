@@ -10,5 +10,9 @@ namespace Business
         public string[] GetReservationConflicts();
         public Customer[] FindByName(string keyword);
         public Customer[] FindFirstCustomersGroupedByCountry();
+        public List<Reservation> SortReservationByDate(List<Reservation> reservations);
+        public List<List<Reservation>> DetectOverlaps(List<Reservation> reservations);
+        public List<Reservation> AdjustReservations(List<Reservation> initialReservations, List<Reservation> reservationsToFit);
+
     }
 }

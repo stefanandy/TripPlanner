@@ -10,17 +10,15 @@ namespace Business
 {
     public class DataExport : IDataExporter
     {
+        private readonly int FINISH_TO_READ=-1;
+
         public void WriteCustomers(string filePath, Customer[] customers)
         {
-
             using (var writer=new StreamWriter(filePath,false,Encoding.UTF8) )
-            {
                 using (var csv=new CsvWriter(writer) )
                 {
                     csv.WriteRecords(customers);
                 }
-            }
-            
         }
 
 
@@ -32,24 +30,16 @@ namespace Business
 
             using (FileStream fileToWrite = new FileStream(outputFile, FileMode.Create))
             {
-
-                RijndaelManaged algortim = new RijndaelManaged();
-
-                using (CryptoStream crypt = new CryptoStream(fileToWrite, algortim.CreateEncryptor(key, key), CryptoStreamMode.Write))
-                {
-
+                RijndaelManaged algorithm = new RijndaelManaged();
+                using (CryptoStream crypt = new CryptoStream(fileToWrite, algorithm.CreateEncryptor(key, key), CryptoStreamMode.Write))
                     using (FileStream fileToRead = new FileStream(inputFile, FileMode.Open))
                     {
-
                         int data;
-
-                        while ((data = fileToRead.ReadByte()) != -1)
+                        while ( (data = fileToRead.ReadByte()) != FINISH_TO_READ)
                         {
                             crypt.WriteByte((byte)data);
                         }
-
-                    }
-                }
+                    } 
             }
         }
     }
